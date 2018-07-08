@@ -14,8 +14,8 @@ namespace ContosoCookbook.Services
             // Read RecipeData.json from this PCL's DataModel folder
             var name = typeof(RecipeService).AssemblyQualifiedName.Split(',')[1].Trim();
             var assembly = Assembly.Load(new AssemblyName(name));
-            var stream = assembly.GetManifestResourceStream(name + ".Data.RecipeData.json");
 
+            var stream = assembly.GetManifestResourceStream(name + ".Data.RecipeData.json");
             // Parse the JSON and generate a collection of RecipeGroup objects
             using (var reader = new StreamReader(stream))
             {

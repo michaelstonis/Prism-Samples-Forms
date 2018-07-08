@@ -100,7 +100,10 @@
     <ITunesArtwork Include="iTunesArtwork@2x" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ContosoCookbook\ContosoCookbook.csproj" />
+    <ProjectReference Include="..\ContosoCookbook\ContosoCookbook.csproj">
+      <Project>{74248B22-F60B-4636-BC4F-59CAAFC83520}</Project>
+      <Name>ContosoCookbook</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -129,6 +132,9 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.123-pre" />
+    <PackageReference Include="ReactiveUI">
+      <Version>8.3.1</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   

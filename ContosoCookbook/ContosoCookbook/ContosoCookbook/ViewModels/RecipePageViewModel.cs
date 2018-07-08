@@ -1,6 +1,7 @@
 using System;
 using ContosoCookbook.Business;
 using Prism.Navigation;
+using ReactiveUI;
 
 namespace ContosoCookbook.ViewModels
 {
@@ -10,7 +11,7 @@ namespace ContosoCookbook.ViewModels
         public Recipe Recipe
         {
             get => _recipe;
-            set => SetProperty(ref _recipe, value);
+            set => this.RaiseAndSetIfChanged(ref _recipe, value);
         }
 
         public RecipePageViewModel()

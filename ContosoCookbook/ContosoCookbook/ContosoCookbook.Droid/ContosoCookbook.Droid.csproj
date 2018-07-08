@@ -69,6 +69,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
     <PackageReference Include="Xamarin.Forms" Version="2.5.1.444934" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.1.0.123-pre" />
+    <PackageReference Include="ReactiveUI">
+      <Version>8.3.1</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

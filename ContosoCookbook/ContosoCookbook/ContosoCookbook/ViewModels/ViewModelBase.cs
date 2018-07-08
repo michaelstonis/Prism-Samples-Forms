@@ -1,9 +1,10 @@
 ﻿using Prism.Mvvm;
 using Prism.Navigation;
+using ReactiveUI;
 
 namespace ContosoCookbook.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware
+    public class ViewModelBase : ReactiveObject, INavigationAware
     {
         public ViewModelBase()
         {

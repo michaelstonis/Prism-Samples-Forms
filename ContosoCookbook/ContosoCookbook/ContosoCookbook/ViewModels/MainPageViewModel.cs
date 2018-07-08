@@ -3,6 +3,10 @@ using ContosoCookbook.Services;
 using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
+using ReactiveUI;
+using System.Threading.Tasks;
+using System.Reactive;
+using System.Reactive.Linq;
 
 namespace ContosoCookbook.ViewModels
 {
@@ -15,26 +19,36 @@ namespace ContosoCookbook.ViewModels
         {
             _navigationService = navigationService;
             _recipeService = recipeService;
-            RecipeSelectedCommand = new DelegateCommand<Recipe>(RecipeSelected);
+            RecipeSelectedCommand = 
+                ReactiveCommand
+                    .CreateFromTask<Recipe>(
+                        async recipe => await RecipeSelected(recipe),
+                        this.WhenAnyObservable(x => x.RecipeSelectedCommand.IsExecuting)
+                            .Select(isExecuting => !isExecuting)
+                            .StartWith(true));
         }
 
-        public DelegateCommand<Recipe> RecipeSelectedCommand { get; }
+        private ReactiveCommand<Recipe, Unit> _recipeSelectedCommand;
+        public ReactiveCommand<Recipe, Unit> RecipeSelectedCommand         {
+            get => _recipeSelectedCommand;
+            private set => this.RaiseAndSetIfChanged(ref _recipeSelectedCommand, value);
+        }
 
         private ObservableCollection<RecipeGroup> _recipeGroups;
         public ObservableCollection<RecipeGroup> RecipeGroups
         {
             get => _recipeGroups;
-            set => SetProperty(ref _recipeGroups, value);
+            set => this.RaiseAndSetIfChanged(ref _recipeGroups, value);
         }
 
-        private async void RecipeSelected(Recipe recipe)
+        private Task RecipeSelected(Recipe recipe)
         {
             var p = new NavigationParameters
             {
                 { "recipe", recipe }
             };
 
-            await _navigationService.NavigateAsync("RecipePage", p);
+            return _navigationService.NavigateAsync("RecipePage", p);
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
