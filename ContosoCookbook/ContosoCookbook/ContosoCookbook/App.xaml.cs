@@ -21,6 +21,10 @@ namespace ContosoCookbook
         {
             InitializeComponent();
 
+            //TODO: This works
+            //this.MainPage = new NavigationPage(new MainPage { ViewModel = new ViewModels.MainPageViewModel(null, null) });
+
+            //TODO: This crashes
             var result = await NavigationService.NavigateAsync("NavigationPage/MainPage");
 
             if (!result.Success)
